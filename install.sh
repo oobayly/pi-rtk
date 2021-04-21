@@ -30,6 +30,14 @@ for f in package/etc/*; do
 	fi
 done
 
+# Cron scripts
+for f in package/cron.hourly/*; do
+	cp "${f}" /etc/cron.hourly
+done
+for f in package/cron.daily/*; do
+	cp "${f}" /etc/cron.daily
+done
+
 # Build web app
 cd pi-rtk-http
 echo "Installing npm packages..."

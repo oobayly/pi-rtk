@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+# Delete any files in /var/cache/pi-rtk that are older than 7 days
+/usr/bin/find /var/cache/pi-rtk -type f -ctime +7 -exec rm {} \;
+

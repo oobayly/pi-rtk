@@ -1,0 +1,17 @@
+#!/usr/bin/sh
+
+CACHE_PATH=/var/cache/pi-rtk
+UBX_PATH="${CACHE_PATH}/ubx"
+RINEX_PATH="${CACHE_PATH}/rinex"
+
+mkdir -p "$UBX_PATH"
+mkdir -p "$RINEX_PATH"
+
+# Only list ubx files in the CACHE_PATH, as the processed files are in the ubx subdirectory
+/usr/bin/find "$CACHE_PATH" -maxdepth 1 -type f -iname '*.ubx' | while read ubx; do
+	# Only convert ubx files that are not open
+	if [ -z "$(/usr/bin/lsof "${ubx}")" ]; then
+		/usr/local/bin/convbin -d "$RINEX_PATH" "$ubx" 2>/dev/null
+		mv "$ubx" "$UBX_PATH"
+	fi
+done
