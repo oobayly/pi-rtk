@@ -54,7 +54,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 Update all packages, and then install all the required packages:
 ``` bash
 sudo apt-get dist-upgrade
-sudo apt-get install screen vim git gpsd/buster-backports
+sudo apt-get install lsof screen vim tree telnet git gfortran gpsd/buster-backports
 ```
 
 Install Node.js 14
@@ -75,4 +75,24 @@ GPSD_OPTIONS="-G"
 
 # Automatically hot add/remove USB GPS devices via gpsdctl
 USBAUTO="false"
+```
+
+## Clone repositories
+The [RTKLIB fork by rtklibexplorer](https://github.com/rtklibexplorer/RTKLIB) is optimised for *"single and dual frequency low cost GPS receivers, especially u-blox receivers"*, but has not Debian package, so will need to be cloned. This repro should also be cloned.
+``` bash
+mkdir -p ~/src
+cd ~/src
+git clone https://github.com/rtklibexplorer/RTKLIB
+git clone https://github.com/oobayly/pi-rtk
+```
+
+### Build and install RTKLIB
+As of 21 April 2021 there's a [bug in RTKLIB](https://github.com/rtklibexplorer/RTKLIB/issues/38) where the `rtkrcv` doesn't start if run with a telnet interface. [This PR](https://github.com/rtklibexplorer/RTKLIB/pull/56) fixes the issue, so a patch needs to be applied.
+
+``` bash
+cd ~/src/RTKLIB
+patch -p0 < ~/src/pi-rtk/patches/rtklib-patch-38.diff
+cd ~/src/RTKLIB/app/consapp/
+make
+sudo make install
 ```
