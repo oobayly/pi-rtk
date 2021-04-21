@@ -1,0 +1,41 @@
+pre {
+  width: 100%;
+  /* height: 300px; */
+}
+
+.col-lat::before {
+  content: "Lat";
+  padding-right: .5ex;
+}
+
+.col-lon::before {
+  content: "Lon";
+  padding-right: .5ex;
+}
+
+.col-degree::after {
+  content: "°";
+  padding-left: .5ex;
+}
+
+.col-metre::after {
+  content: "m";
+  padding-left: .5ex;
+}
+
+.square {
+  position: relative;
+  width: 100%;
+}
+
+.square::after {
+  content: "";
+  display: block;
+  padding-bottom: 125%;
+}
+
+.square > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

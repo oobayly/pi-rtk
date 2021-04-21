@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>pi-rtk</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/styles/styles.css" />
+  <link rel="stylesheet" href="assets/styles/sat-view.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <!-- Title -->
+    <span class="navbar-brand">pi-rtk</span>
+
+    <!-- Toggle buttons for mobile -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu items -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- Connect -->
+        <li class="nav-item">
+          <a class="nav-link" id="navLinkConnect" href="#">Connect</a>
+        </li>
+
+        <!-- Disconnect -->
+        <li class="nav-item">
+          <a class="nav-link" id="navLinkDisconnect" href="#">Disconnect</a>
+        </li>
+
+        <!-- Devices list -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDevices" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Devices
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarDevices">
+          </div>
+        </li>
+
+        <!-- RINEX download-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarRinex" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            RINEX
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarRinex">
+            <a class="nav-link" href="/rinex" target="_blank">
+              Station files
+            </a>
+            <a class="nav-link" href="https://gnss.osi.ie/" target="_blank">
+              OSI GNSS Data
+            </a>
+            <a class="nav-link" href="https://www.ordnancesurvey.co.uk/gps/os-net-rinex-data/" target="_blank">
+              OSGB RINEX Data
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid my-3" id="gnssInfo">
+    <h4 class="gnss-name"></h4>
+    <div class="container p-0">
+      <!-- Error alert -->
+      <div class="row row-error">
+        <div class="col-12 alert alert-warning">
+          No GNSS information is available.
+        </div>
+      </div>
+
+      <!-- Date and fix info -->
+      <div class="row row-info">
+        <div class="col-md-4 col-date">-</div>
+        <div class="col-md-4 col-mode">-</div>
+      </div>
+
+      <!-- Location-->
+      <div class="row row-info">
+        <div class="col-md-4 col-lat col-degree">-</div>
+        <div class="col-md-4 col-lon col-degree">-</div>
+        <div class="col-md-4 col-alt col-metre">-</div>
+      </div>
+    </div>
+
+    <div class="container mt-3" id="satellites">
+      <div class="row">
+        <!-- Satellite plan -->
+        <div class="col-lg-6 order-lg-1">
+          <div id="satView"></div>
+        </div>
+
+        <!-- Satellite table -->
+        <div class="col-lg-6 order-lg-0">
+          <table class="table" id="tableSat">
+            <thead>
+              <tr>
+                <th scope="col">PRN</th>
+                <th scope="col">El</th>
+                <th scope="col">Az</th>
+                <th scope="col">SNR</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/jquery-sat-view.js"></script>
+
+</body>
+
+</html>

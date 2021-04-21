@@ -1,0 +1,50 @@
+svg.sat-view {
+  stroke-width: 2;
+}
+
+svg.sat-view .view {
+  stroke: grey;
+  fill: none;
+}
+
+svg.sat-view .sat {
+  transition: all .25s;
+  stroke: black;
+  fill: lime;
+  cursor: pointer;
+}
+
+svg.sat-view .sat.active {
+  stroke-width: 4;
+}
+
+svg.sat-view .sat.active text {
+  font-weight: bold;
+}
+
+svg.sat-view text {
+  font: 24px sans-serif;
+  stroke: none;
+  fill: black;
+}
+
+svg.sat-view .sat.sat-0 {
+  fill: darkgrey;
+}
+svg.sat-view .sat.sat-2 {
+  fill: royalblue;
+}
+svg.sat-view .sat.sat-3 {
+  fill: red;
+}
+svg.sat-view .sat.sat-5 {
+  fill: yellow;
+}
+svg.sat-view .sat.sat-6 {
+  fill: violet;
+}
+
+svg.sat-view .snr-view .sat text {
+  font-size: 18px;
+  text-anchor: middle;
+}
