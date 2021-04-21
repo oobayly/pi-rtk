@@ -54,7 +54,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 Update all packages, and then install all the required packages:
 ``` bash
 sudo apt-get dist-upgrade
-sudo apt-get install screen vim tree telnet git gfortran gpsd/buster-backports
+sudo apt-get install lsof screen vim tree telnet git gfortran gpsd/buster-backports
 ```
 
 Install Node.js 14
