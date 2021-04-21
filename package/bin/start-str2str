@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+
+CMD=/usr/local/b
+ARGS=
+
+while getopts "c:" opt; do
+	case "$opt" in
+		c) CONFIG_FILE="$OPTARG";;
+	esac
+done
+
+if [ -z "$CONFIG_FILE" ]; then
+	echo "Config file is required" >&2
+	exit 1
+elif [ -f "$CONFIG_FILE" ]; then
+	source "$CONFIG_FILE"
+else
+	echo "Config file '$CONFIG_FILE' doesn't exist" >&2
+	exit 1
+fi
+
+ARGS="$ARGS -in \"$IN\""
+
+for out in "${OUT[@]}"; do
+	ARGS="$ARGS -out \"$out\""
+done
+
+if [ -n "$MSG" ]; then
+	ARGS="$ARGS -msg \"$MSG\""
+fi
+
+eval /usr/local/bin/str2str $ARGS
+

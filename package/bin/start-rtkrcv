@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+
+ARGS=
+
+while getopts "c:" opt; do
+	case "$opt" in
+		c) CONFIG_FILE="$OPTARG";;
+	esac
+done
+
+if [ -z "$CONFIG_FILE" ]; then
+	echo "Config file is required" >&2
+	exit 1
+elif [ -f "$CONFIG_FILE" ]; then
+	source "$CONFIG_FILE"
+else
+	echo "Config file '$CONFIG_FILE' doesn't exist" >&2
+	exit 1
+fi
+
+if [ -n "$PORT" ]; then
+	ARGS="$ARGS -p $PORT"
+fi
+
+if [ -n "$MONITOR" ]; then
+	ARGS="$ARGS -m $MONITOR"
+fi
+
+if [ -n "$DEVICE" ]; then
+	ARGS="$ARGS -d $DEVICE"
+fi
+
+/usr/local/bin/rtkrcv -o "$OPTFILE" $ARGS -w "$PASSWORD" -s

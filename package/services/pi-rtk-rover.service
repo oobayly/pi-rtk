@@ -1,0 +1,14 @@
+[Unit]
+Description=RTKLIB rover service
+After=gps-multiplex.service
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/opt/pi-rtk/bin/start-rtkrcv -c /etc/pi-rtk/pi-rtk-rover.conf 2>/dev/null
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
