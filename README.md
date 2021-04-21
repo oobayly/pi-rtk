@@ -39,7 +39,6 @@ sudo usermod -a -G adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,
 The GPSD server for Debian Buster is quite an old version which doesn't fully support u-blox. So the Backports needs to be added to the package sources:
 ``` bash
 echo "deb http://deb.debian.org/debian buster-backports main" | tee --append /etc/apt/sources.list
-
 sudo apt-get update
 ```
 
@@ -55,6 +54,25 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 Update all packages, and then install all the required packages:
 ``` bash
 sudo apt-get dist-upgrade
-
 sudo apt-get install screen vim git gpsd/buster-backports
+```
+
+Install Node.js 14
+``` bash
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install nodejs
+```
+
+## Configure GPSD
+GPSD is used to parse and provide data to the status website, but instead of listening directly to the GNSS device, it'll use the multiplexed stream. Update `/etc/default/gpsd` to:
+```
+# Devices gpsd should collect to at boot time.
+# They need to be read/writeable, either by user gpsd or the group dialout.
+DEVICES="tcp://localhost:4000 tcp://localhost:4001"
+
+# Other options you want to pass to gpsd
+GPSD_OPTIONS="-G"
+
+# Automatically hot add/remove USB GPS devices via gpsdctl
+USBAUTO="false"
 ```
