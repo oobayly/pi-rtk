@@ -62,7 +62,7 @@ done
 echo "Setting permissions..."
 chown -R root:root "${TARGET}"
 find "${TARGET}" -type d -exec chmod 755 {} \;
-find "${TARGET}" -type d -exec chmod 755 {} \;
+find "${TARGET}" -type f -exec chmod 644 {} \;
 find "${TARGET_BIN}" -type f -exec chmod 755 {} \;
 
 
