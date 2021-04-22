@@ -39,14 +39,10 @@ for f in package/cron.daily/*; do
 done
 
 # Build web app
-cd pi-rtk-http
-echo "Installing npm packages..."
-npm install
-echo "Building web app..."
-npm run build
 echo "Copying web app..."
-rsync -r dist/* "${TARGET_HTTP}"
-cd ..
+rsync -r pi-rtk-http/dist/* "${TARGET_HTTP}"
+echo "Installing packages..."
+npm --prefix "${TARGET_HTTP}" install --only=prod
 
 echo "Creating symlinks..."
 if [ ! -L "${ETC}" ]; then

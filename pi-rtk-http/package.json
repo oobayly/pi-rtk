@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts ./src",
     "copy-public": "shx cp -r ./public ./dist/",
-    "build": "tsc && npm run copy-public",
+    "copy-package": "shx cp package.json ./dist/",
+    "copy": "npm run copy-public & npm run copy-package",
+    "build": "tsc && npm run copy",
     "start": "npm run build && node ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
