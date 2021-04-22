@@ -68,12 +68,15 @@ GPSD is used to parse and provide data to the status website, but instead of lis
 ```
 # Devices gpsd should collect to at boot time.
 # They need to be read/writeable, either by user gpsd or the group dialout.
+# localhost:4000 provides the multiplexed GNSS serial stream
+# localhost:4001 provides the corrected rover stream
 DEVICES="tcp://localhost:4000 tcp://localhost:4001"
 
 # Other options you want to pass to gpsd
-GPSD_OPTIONS="-G"
+GPSD_OPTIONS=""
 
 # Automatically hot add/remove USB GPS devices via gpsdctl
+# This is disabled so GPSD doesn't take control of the GNSS serial device
 USBAUTO="false"
 ```
 
@@ -96,3 +99,23 @@ cd ~/src/RTKLIB/app/consapp/
 make
 sudo make install
 ```
+
+### Install pi-rtk package
+The pi-rtk package install itself into `/opt/pi-rtk`, and will do the following:
+- Install systemd service files
+  - `pi-rtk-multiplex` - Allows multiple applications to read from a single GNSS serial port
+  - `pi-rtk-base` - Operates the system as an RTK base station that can provide data to an NTRIP Caster
+  - `pi-rtk-rover` - Operates the system as an RTK rover
+  - `pi-rtk-http` - A HTTP server that allows a user to view the status of the station
+- Install configuration files int `/etc/pi-rtk`
+- Install cronjobs for the ubx/RINEX `pi-rtk-multiplex` service
+
+The Nodejs HTTP server needs to be built before installation
+``` bash
+cd ~/src/pi-rtk/
+npm --prefix pi-rtk-http install
+npm --prefix pi-rtk-http run build
+sudo ./install.sh
+```
+
+## Configuration
