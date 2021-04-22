@@ -50,3 +50,15 @@ Finally, you probably want the interface to autostart:
 ``` bash
 sudo nmcli connection modify 3\ Internet connection.autoconnect yes
 ```
+
+## Hamachi
+A simple way of enablinge remote access over a 3g connection is to use [Hamachi](https://www.vpn.net/linux). It's more than likely the hard-float (hf) version, but it's best to verify.
+``` bash
+dpkg --print-architecture
+
+cd /var/tmp/
+wget https://www.vpn.net/installers/logmein-hamachi_<version>_armhf.deb
+sudo dpkg -i logmein-hamachi_<version>_armhf.deb
+```
+
+You can read the [readme here](https://support.logmeininc.com/central/help/how-to-install-the-client-to-a-local-computer-central-t-hamachi-add-attached-local)
