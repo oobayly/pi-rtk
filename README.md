@@ -110,8 +110,11 @@ The pi-rtk package install itself into `/opt/pi-rtk`, and will do the following:
 - Install configuration files int `/etc/pi-rtk`
 - Install cronjobs for the ubx/RINEX `pi-rtk-multiplex` service
 
+The Nodejs HTTP server needs to be built before installation
 ``` bash
 cd ~/src/pi-rtk/
+npm --prefix pi-rtk-http install
+npm --prefix pi-rtk-http run build
 sudo ./install.sh
 ```
 
