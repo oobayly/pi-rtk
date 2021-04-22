@@ -1,0 +1,19 @@
+[Unit]
+Description=HTTP service for providing station status
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Environment=NODE_PORT=5000
+Environment=GPSD_HOST=localhost
+Environment=DATA_PATH=/var/cache/pi-rtk
+Type=simple
+Restart=always
+# This runs as root which is a really bad idea
+WorkingDirectory=/opt/pi-rtk/http
+ExecStart=/usr/bin/node /opt/pi-rtk/http/app.js
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target

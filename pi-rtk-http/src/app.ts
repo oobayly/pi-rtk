@@ -28,9 +28,9 @@ interface ErrorMessage extends Message {
 // Declarations
 // ==========================
 
+const listenPort = env.NODE_PORT || 5000;
 const gpsdHost = env.GPSD_HOST || "localhost";
-const listenPort = env.PORT || 5000;
-const rinexCache = env.RINEX_PATH;
+const cachePath = env.DATA_PATH;
 const app = express();
 const server = http.createServer(app);
 const wss = new Server({ server });
@@ -180,12 +180,12 @@ app.use(
   "/",
   express.static("public")
 );
-if (rinexCache) {
+if (cachePath) {
   // Serve the rinex files
   app.use(
-    "/rinex",
-    express.static(rinexCache),
-    serveIndex(rinexCache)
+    "/data",
+    express.static(cachePath),
+    serveIndex(cachePath)
   );
 }
 

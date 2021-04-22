@@ -41,7 +41,7 @@ done
 # Build web app
 echo "Copying web app..."
 rsync -r pi-rtk-http/dist/* "${TARGET_HTTP}"
-echo "Installing packages..."
+echo "Installing packages for HTTP server..."
 npm --prefix "${TARGET_HTTP}" install --only=prod
 
 echo "Creating symlinks..."
