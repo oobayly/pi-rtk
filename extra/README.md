@@ -1,7 +1,7 @@
 # Extra Information
 
 ## ZTE MF823
-Unlike newer 4g USB devices, the ZTE MD823 4G/LTE isn't exposed as a simple ethernet device. The benefit of this is that you *might* receive a public IP from the network rather than a carrier-grade NAT'd address.
+Unlike newer 4g USB devices, the ZTE MD823 4G/LTE isn't exposed as a simple ethernet device. The benefit of this is that you *might* receive a public IP from the carrier rather than a carrier-grade NAT'd address.
 
 The simplest method to get it working is to use Network Manager, but with some caveats:
 - Don't allow Network-Manager to control `eth0` and `wlan0`
@@ -62,3 +62,16 @@ sudo dpkg -i logmein-hamachi_<version>_armhf.deb
 ```
 
 You can read the [readme here](https://support.logmeininc.com/central/help/how-to-install-the-client-to-a-local-computer-central-t-hamachi-add-attached-local)
+
+## Firewall
+If you have an interface with a public IP address, it's best to install a firewall. In my case I just want to block inbound traffic on the wwan0 interface of the ZTE MF823 dongle in case it recieves a public IP from the carrier. More stringent rules might be required if working on uncontrolled networks.
+
+``` bash
+sudo apt-get install ufw
+
+sudo ufw deny in on wwan0
+sudo ufw default allow incoming
+sudo ufw default allow outgoing
+
+sudo ufw enable 
+```
