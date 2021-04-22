@@ -54,7 +54,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 Update all packages, and then install all the required packages:
 ``` bash
 sudo apt-get dist-upgrade
-sudo apt-get install lsof screen vim tree telnet git gfortran gpsd/buster-backports
+sudo apt-get install dnsutils lsof screen vim tree telnet tcpdump git gfortran gpsd/buster-backports
 ```
 
 Install Node.js 14
@@ -64,8 +64,6 @@ sudo apt-get install nodejs
 ```
 
 ## Configure GPSD
-GPSD is used to parse and provide data to the status website, but instead of listening directly to the GNSS device, it'll use the multiplexed stream. Update `/etc/default/gpsd` to:
-```
 # Devices gpsd should collect to at boot time.
 # They need to be read/writeable, either by user gpsd or the group dialout.
 # localhost:4000 provides the multiplexed GNSS serial stream
