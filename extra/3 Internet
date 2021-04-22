@@ -1,0 +1,21 @@
+# Example Network-Manager connection file for Hutchison 3G
+[connection]
+id=3 Internet
+uuid=1ca3f66c-94e8-4199-a203-afe1e1b4a4f1
+type=gsm
+timestamp=1619091039
+
+[gsm]
+apn=3internet
+number=*99#
+password-flags=1
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+ip6-privacy=0
+method=auto
