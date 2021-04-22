@@ -28,14 +28,15 @@ interface ErrorMessage extends Message {
 // Declarations
 // ==========================
 
+const gpsdHost = env.GPSD_HOST || "localhost";
+const listenPort = env.PORT || 5000;
+const rinexCache = env.RINEX_PATH;
 const app = express();
 const server = http.createServer(app);
 const wss = new Server({ server });
 const gpsd = new GpsdClient({
-  host: "10.10.0.50"
+  host: gpsdHost
 });
-const listenPort = env.PORT || 5000;
-const rinexCache = env.RINEX_PATH;
 
 // ==========================
 // Methods
