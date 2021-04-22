@@ -2,6 +2,10 @@
 /*eslint-env jquery */
 
 $(document).ready(() => {
+  const DEVICES = {
+    "tcp://localhost:4000": {name: "Raw GNSS"},
+    "tcp://localhost:4001": {name: "Rover"}
+  };
   const TPV_MODE = ["Unknown", "No Fix", "2d Fix", "3d Fix"];
   const FIX_STATUS = ["Unknown", "Normal", "DGPS", "RTK Fix", "RTK Float", "DR", "GNSS DR", "Time", "Simulated", "P(Y)"];
   const GNSS_ID = ["GPS", undefined, "Galileo", "Beidou", undefined, "QZSS", "GLONASS"];
@@ -36,7 +40,9 @@ $(document).ready(() => {
     devices.length = 0;
 
     data.devices.forEach((dev) => {
-      dev.name = (dev.driver === "NMEA0183" ? "Corrected" : "Raw GNSS") + ` (${dev.driver})`;
+      const name = DEVICES[dev.path]?.name || "Other";
+
+      dev.name = `${name} (${dev.driver})`;
 
       devices.push(dev);
     });
@@ -180,3 +186,4 @@ $(document).ready(() => {
 
   main();
 });
+
