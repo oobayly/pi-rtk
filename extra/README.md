@@ -17,7 +17,7 @@ Edit `/etc/NetworkManager/NetworkManager.conf` and add the following configurati
 unmanaged-devices=interface-name:eth0;interface-name:wlan0
 ```
 
-Add a new connection to `/etc/NetworkManager/system-connections/`. In my case I use Hutchinson 3g, so I've called it `3 Internet`.
+Add a new connection to `/etc/NetworkManager/system-connections/`. In my case I use Hutchison 3g, so I've called it `3 Internet`.
 ``` config
 [connection]
 id=3 Internet
