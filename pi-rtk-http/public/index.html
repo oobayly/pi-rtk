@@ -47,6 +47,10 @@
           </a>
 
           <div class="dropdown-menu" aria-labelledby="navbarDevices">
+            <a href="#" class="dropdown-item" id="navLinkDevices">Reload devices</a>
+            <div class="dropdown-divider"></div>
+            <div class="devices-container">
+            </div>
           </div>
         </li>
 
@@ -132,6 +136,11 @@
   <script src="assets/js/app.js"></script>
   <script src="assets/js/jquery-sat-view.js"></script>
 
+  <script type="module">
+    import * as utm from "https://cdn.jsdelivr.net/npm/geodesy@2/utm.js";
+
+    window.utm = utm;
+  </script>
 </body>
 
 </html>
