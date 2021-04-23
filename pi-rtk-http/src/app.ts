@@ -16,7 +16,7 @@ interface Message {
 
 interface CommandMessage extends Message {
   type: "command",
-  // command: "ping"
+  command: "devices"
 }
 
 interface ErrorMessage extends Message {
@@ -48,8 +48,14 @@ function broadcastMessage(message: Message): void {
 }
 
 function handleCommand(_command: CommandMessage): Message {
-  // switch (_command.command) {
-  // }
+  switch (_command.command) {
+    case "devices":
+      gpsd.devices();
+
+      break;
+    default:
+      return { type: "error", message: "Invalid command." } as ErrorMessage;
+  }
 
   return {
     type: "info",
@@ -189,4 +195,6 @@ if (cachePath) {
   );
 }
 
+console.log(`GPSD is on ${gpsdHost}`);
+console.log(`pi-rtk-http is listening on ${listenPort}`);
 server.listen(listenPort);

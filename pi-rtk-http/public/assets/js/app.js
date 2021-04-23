@@ -3,8 +3,8 @@
 
 $(document).ready(() => {
   const DEVICES = {
-    "tcp://localhost:4000": {name: "Raw GNSS"},
-    "tcp://localhost:4001": {name: "Rover"}
+    "tcp://localhost:4000": { name: "Raw GNSS" },
+    "tcp://localhost:4001": { name: "Rover" }
   };
   const TPV_MODE = ["Unknown", "No Fix", "2d Fix", "3d Fix"];
   const FIX_STATUS = ["Unknown", "Normal", "DGPS", "RTK Fix", "RTK Float", "DR", "GNSS DR", "Time", "Simulated", "P(Y)"];
@@ -17,6 +17,14 @@ $(document).ready(() => {
   let currentDevice = null;
   const container = $("#gnssInfo").hide();
   let ws;
+
+  // ========================
+  // Properties
+  // ========================
+
+  // ========================
+  // Methods
+  // ========================
 
   const main = () => {
     connect();
@@ -119,6 +127,10 @@ $(document).ready(() => {
 
   }
 
+  // ========================
+  // Event handlers
+  // ========================
+
   const onDeviceClick = (e) => {
     currentDevice = $(e.target).data("device");
 
@@ -159,7 +171,6 @@ $(document).ready(() => {
         } else if (gpsdClass === "TPV") {
           found.tpv = data.data;
         }
-
 
         if (found.clearId) {
           window.clearTimeout(found.clearId);
