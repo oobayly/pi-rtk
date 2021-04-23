@@ -3,6 +3,7 @@ import * as http from "http";
 import { env } from "process";
 import serveIndex from "serve-index";
 import WebSocket, { Data, Server } from 'ws';
+import * as dotenv from "dotenv";
 
 import { GpsdClient } from "./gpsd-client";
 
@@ -27,6 +28,9 @@ interface ErrorMessage extends Message {
 // ==========================
 // Declarations
 // ==========================
+
+// Configure environment
+dotenv.config();
 
 const listenPort = env.NODE_PORT || 5000;
 const gpsdHost = env.GPSD_HOST || "localhost";
