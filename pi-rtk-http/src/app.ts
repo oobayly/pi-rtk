@@ -3,6 +3,7 @@ import * as http from "http";
 import { env } from "process";
 import serveIndex from "serve-index";
 import WebSocket, { Data, Server } from 'ws';
+import * as dotenv from "dotenv";
 
 import { GpsdClient } from "./gpsd-client";
 
@@ -16,7 +17,7 @@ interface Message {
 
 interface CommandMessage extends Message {
   type: "command",
-  // command: "ping"
+  command: "devices"
 }
 
 interface ErrorMessage extends Message {
@@ -27,6 +28,9 @@ interface ErrorMessage extends Message {
 // ==========================
 // Declarations
 // ==========================
+
+// Configure environment
+dotenv.config();
 
 const listenPort = env.NODE_PORT || 5000;
 const gpsdHost = env.GPSD_HOST || "localhost";
@@ -48,8 +52,14 @@ function broadcastMessage(message: Message): void {
 }
 
 function handleCommand(_command: CommandMessage): Message {
-  // switch (_command.command) {
-  // }
+  switch (_command.command) {
+    case "devices":
+      gpsd.devices();
+
+      break;
+    default:
+      return { type: "error", message: "Invalid command." } as ErrorMessage;
+  }
 
   return {
     type: "info",
@@ -189,4 +199,6 @@ if (cachePath) {
   );
 }
 
+console.log(`GPSD is on ${gpsdHost}`);
+console.log(`pi-rtk-http is listening on ${listenPort}`);
 server.listen(listenPort);
