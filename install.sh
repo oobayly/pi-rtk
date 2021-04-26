@@ -40,7 +40,8 @@ done
 
 # Build web app
 echo "Copying web app..."
-rsync -r pi-rtk-http/dist/* "${TARGET_HTTP}"
+rsync -r pi-rtk-http/server/dist/* "${TARGET_HTTP}"
+cp pi-rtk-http/server/package.json "${TARGET_HTTP}"
 echo "Installing packages for HTTP server..."
 npm --prefix "${TARGET_HTTP}" install --only=prod
 
