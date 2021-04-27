@@ -1,8 +1,55 @@
-<nav class="uk-navbar">
-  <!-- <a href="" -->
-  <a href="#side-menu" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+<div class="uk-container-expand uk-padding-remove-horizontal">
+  <nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+      <!-- Toggle for small screens-->
+      <button type="button" class="uk-navbar-toggle uk-hidden@s" uk-toggle="target: #side-menu"
+        uk-navbar-toggle-icon></button>
+
+      <a class="uk-navbar-item uk-logo" routerLink="/">pi-rtk</a>
+
+      <ul class="uk-navbar-nav uk-visible@s">
+        <li class="uk-navbar-item"><a routerLink="status">Status</a></li>
+        <li class="uk-navbar-item"><a routerLink="map">Map</a></li>
+        <!-- Devices menu -->
+        <li>
+          <a href="#">Devices</a>
+          <div class="uk-navbar-dropdown">
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+              <li class="uk-nav-header">Devices</li>
+              <li><a href="">Reload Devices</a></li>
+
+              <li *ngFor="let device of devices$ | async">
+                <a href="#">{{device.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- RINEX links -->
+        <li>
+          <a href="#">RINEX Files</a>
+          <div class="uk-navbar-dropdown">
+        <li class="uk-nav-header">RINEX Files</li>
+        <ul class="uk-nav uk-navbar-dropdown-nav">
+          <li *ngFor="let link of rinexLinks">
+            <a [href]="link.href" target="_blank">{{link.name}}</a>
+          </li>
+        </ul>
+    </div>
+    </li>
+    </ul>
+</div>
 </nav>
 
-<div id="side-menu" class="uk-offcanvas">
+<div id="side-menu" uk-offcanvas>
+  <div class="uk-offcanvas-bar">
+    <button type="button" class="uk-offcanvas-close" uk-close></button>
 
+    <h3>Title</h3>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.</p>
+  </div>
+</div>
 </div>
