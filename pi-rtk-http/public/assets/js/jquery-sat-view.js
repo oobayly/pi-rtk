@@ -175,9 +175,9 @@
       // Add or update the sky view
       satellites.forEach((item, index) => {
         const { az, el, PRN } = item;
-        const radius = 450 * el / 90;
+        const radius = 450 * (90 - el) / 90;
         const x = radius * Math.sin(az * Math.PI / 180);
-        const y = radius * Math.cos(az * Math.PI / 180);
+        const y = radius * -Math.cos(az * Math.PI / 180);
 
         let group = skyView.find(`.sat[data-prn='${PRN}'`)[0];
 
