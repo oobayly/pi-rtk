@@ -3,7 +3,7 @@
 CACHE_PATH=/var/cache/pi-rtk
 UBX_PATH="${CACHE_PATH}/ubx"
 RINEX_PATH="${CACHE_PATH}/rinex"
-RINEX_VERSION="2.11"
+RINEX_VERSION="3.04"
 
 mkdir -p "$UBX_PATH"
 mkdir -p "$RINEX_PATH"
