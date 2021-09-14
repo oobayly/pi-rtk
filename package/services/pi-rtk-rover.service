@@ -1,6 +1,6 @@
 [Unit]
 Description=RTKLIB rover service
-After=gps-multiplex.service
+After=pi-rtk-multiplex.service
 StartLimitIntervalSec=60
 StartLimitBurst=5
 

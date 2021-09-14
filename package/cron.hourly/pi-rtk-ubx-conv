@@ -3,6 +3,7 @@
 CACHE_PATH=/var/cache/pi-rtk
 UBX_PATH="${CACHE_PATH}/ubx"
 RINEX_PATH="${CACHE_PATH}/rinex"
+RINEX_VERSION="3.04"
 
 mkdir -p "$UBX_PATH"
 mkdir -p "$RINEX_PATH"
@@ -11,7 +12,11 @@ mkdir -p "$RINEX_PATH"
 /usr/bin/find "$CACHE_PATH" -maxdepth 1 -type f -iname '*.ubx' | while read ubx; do
 	# Only convert ubx files that are not open
 	if [ -z "$(/usr/bin/lsof "${ubx}")" ]; then
-		/usr/local/bin/convbin -d "$RINEX_PATH" "$ubx" 2>/dev/null
+		name=$(basename "${ubx}")
+		name=${name%.*}
+
+		/usr/local/bin/convbin -v "$RINEX_VERSION" -d "$RINEX_PATH" "$ubx" 2>/dev/null
+		touch -r "${ubx}" $RINEX_PATH/$name*
 		mv "$ubx" "$UBX_PATH"
 	fi
 done
